@@ -50,7 +50,7 @@ static var _current_controller_name : String = "Default":
 
 # Setup for shared class data / actions
 static func _static_init():
-	Input.joy_connection_changed.connect(preload("key_prompt_texture.gd")._joy_connection_changed) # A bug currently prevents directly referencing the static member.
+	Input.joy_connection_changed.connect(preload("key_prompt_texture.gd")._update_controller_name.unbind(2)) # A bug currently prevents directly referencing the static member.
 	
 	# Load the data from controller_name_mappings.json
 	var controller_name_mappings = preload("controller_name_mappings.json").data
@@ -62,10 +62,13 @@ static func _static_init():
 			# Although it's more human-readable to have the device names as an array of values,
 			# it's technically easier to handle if we have them as keys internally.
 			_controller_name_mappings[RegEx.create_from_string(alias)] = controller_name
+		
+	# So that textures are properly set up on load
+	_update_controller_name()
 
 # Handles controller connection changes on behalf of all KeyPromptTextures.
 # _current_controller_name is set by this function.
-static func _joy_connection_changed(device : int, connected : bool):
+static func _update_controller_name():
 	if Input.get_connected_joypads().size() == 0:
 		_current_controller_name = "Default"
 		return
