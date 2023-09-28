@@ -1,0 +1,19 @@
+{
+	"Xbox" : 
+		[
+			"XInput Gamepad",
+			"Xbox"
+		],
+	"PlayStation" : 
+		[
+			"PS[0-9]"
+		],
+	"Switch" :
+		[
+			"Nintendo Switch"
+		],
+	"Steam Deck" : 
+		[
+			"Steam Deck"
+		]
+}

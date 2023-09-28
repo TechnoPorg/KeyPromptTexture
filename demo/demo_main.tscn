@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw11oonun65fd"]
+
+[ext_resource type="Script" path="res://demo/demo_main.gd" id="1_6n0kj"]
+[ext_resource type="Script" path="res://addons/key_prompt_texture/key_prompt_texture.gd" id="2_mlsfy"]
+
+[sub_resource type="Texture2D" id="Texture2D_885g8"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_mlsfy")
+
+[node name="demo_main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6n0kj")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+dragger_visibility = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VSplitContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_885g8")
+
+[node name="MarginContainer" type="MarginContainer" parent="VSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 450
+theme_override_constants/margin_bottom = 200
+
+[node name="Language Picker" type="OptionButton" parent="VSplitContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+item_count = 3
+selected = 0
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Deutsch"
+popup/item_1/id = 1
+popup/item_2/text = "中文"
+popup/item_2/id = 2
