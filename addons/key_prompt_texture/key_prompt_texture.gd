@@ -85,7 +85,7 @@ static func _joy_connection_changed(device : int, connected : bool):
 
 ## The physical button for which this controller displays an icon.
 ## [br]It can be set interactively through the inspector, or directly.
-var button : JoyButton:
+@export var button : JoyButton:
 	get:
 		return button
 	set(value):

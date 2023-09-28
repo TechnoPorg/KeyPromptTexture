@@ -7,6 +7,7 @@
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_mlsfy")
+button = 1
 
 [node name="demo_main" type="Control"]
 layout_mode = 3
