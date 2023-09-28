@@ -1,3 +1,5 @@
+# Fairly self-explanatory!
+
 @tool
 extends EditorPlugin
 

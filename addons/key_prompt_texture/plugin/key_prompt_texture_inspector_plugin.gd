@@ -1,3 +1,6 @@
+# The custom inspector plugin for a key prompt texture.
+# The heavy lifting is split into inspector_key_picker.
+
 extends EditorInspectorPlugin
 
 var key_picker = preload("inspector_key_picker.gd")
