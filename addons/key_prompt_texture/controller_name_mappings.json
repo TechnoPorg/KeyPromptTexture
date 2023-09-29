@@ -2,7 +2,8 @@
 	"Xbox" : 
 		[
 			"XInput Gamepad",
-			"Xbox"
+			"Xbox",
+			"Default"
 		],
 	"PlayStation" : 
 		[
@@ -15,5 +16,9 @@
 	"Steam Deck" : 
 		[
 			"Steam Deck"
+		],
+	"None" : 
+		[
+			"None"
 		]
 }

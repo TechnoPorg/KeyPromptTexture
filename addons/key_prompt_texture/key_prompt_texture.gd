@@ -5,7 +5,8 @@
 ## Useful for button prompts in UI elements.
 ##
 ## Will search for a valid icon to display based on the first connected controller, and fall back to a default
-## if no controller is connected or the first connected controller is not supported.
+## if the type of the main connected controller is not supported by the plugin.
+## If no controller is connected, an optional "None" texture can be shown (for example, a keyboard prompt for a desktop game).
 ## [br]The textures used by [KeyPromptTexture]s can be changed by replacing or adding files in the [code]res://addons/key_prompt_texture/textures/JOY_BUTTON_*[/code]
 ## folders.
 ## [br]To configure the mapping of [url=https://github.com/gabomdq/SDL_GameControllerDB/blob/master/gamecontrollerdb.txt]controller names[/url]
@@ -13,8 +14,10 @@
 ## When editing or creating these high-level mappings,
 ## use the name of a general class of controllers as the JSON key,
 ## and an array of regular expressions which will be used to match device names (as provided by [method Input.get_joy_name]) as the value.
-## Changes to this file are necessary to change the types of controller for which icons will be handled by [KeyPromptTexture] in the current project.
-## [br]Joypad axes such as LT are currently not supported.
+## [br]"None" in a device name entry will cause the associated key to be used when no controller is connected,
+## whereas "Default" will configure what is used to handle all unknown controllers.
+## [br]Changes to this file are necessary to change the types of controller for which icons will be handled by [KeyPromptTexture] in the current project.
+## [br][br]Joypad axes such as LT are not currently supported.
 
 class_name KeyPromptTexture
 extends Texture2D
@@ -32,6 +35,10 @@ static var _static_notifier : _StaticNotifier = _StaticNotifier.new()
 # The different types of controller handled in the current project.
 # These correspond to the unique filenames which will be loaded from JOY_BUTTON_* folders.
 static var _controller_names : Array
+
+# The name of the controller whose icon pack will be displayed for unknown controllers.
+# Designated by the "Default" entry in controller_name_mappings.json
+static var _default_controller_name : String = ""
 
 # A dictionary with a regular expression for device name matching as the key,
 # and the name of the high-level controller type as the value.
@@ -56,32 +63,43 @@ static func _static_init():
 	var controller_name_mappings = preload("controller_name_mappings.json").data
 	# Loads the list of controller names for which icons are supported.
 	_controller_names = controller_name_mappings.keys()
+	
 	for controller_name in _controller_names:
 		for alias in controller_name_mappings[controller_name]:
 			# Invert the storage scheme from the JSON:
 			# Although it's more human-readable to have the device names as an array of values,
 			# it's technically easier to handle if we have them as keys internally.
-			_controller_name_mappings[RegEx.create_from_string(alias)] = controller_name
+			
+			if alias == "Default":
+				_default_controller_name = controller_name
+				continue
+			else:
+				_controller_name_mappings[RegEx.create_from_string(alias)] = controller_name
 		
 	# So that textures are properly set up on load
+	if _default_controller_name == "":
+		push_warning("KeyPromptTexture: No default controller name configured. No prompts will be displayed for unknown controllers.")
+		
 	_update_controller_name()
 
 # Handles controller connection changes on behalf of all KeyPromptTextures.
 # _current_controller_name is set by this function.
 static func _update_controller_name():
+	var main_joy_name : String
+	# No controller connected
 	if Input.get_connected_joypads().size() == 0:
-		_current_controller_name = "Default"
-		return
-		
-	var main_joy_name = Input.get_joy_name(0)
+		main_joy_name = "None"
+	else:
+		main_joy_name = Input.get_joy_name(0)
 	for alias in _controller_name_mappings:
 		# alias is a RegEx object here
 		if alias.search(main_joy_name):
 			_current_controller_name = _controller_name_mappings[alias]
 			return
 	
-	# Nothing found, fall back.
-	_current_controller_name = "Default"
+	# Nothing found for current controller type,
+	# so fall back to the default type.
+	_current_controller_name = _default_controller_name
 #endregion
 
 #region Instance Members
