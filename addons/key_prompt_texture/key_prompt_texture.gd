@@ -156,5 +156,7 @@ func _has_alpha() -> bool:
 	return _active_texture.has_alpha()
 
 func _is_pixel_opaque(x, y) -> bool:
-	return _active_texture._is_pixel_opaque(x, y)
+	# There's no way to query opacity for CompressedTexture2D, which is what 99% of textures will be.
+	# There's nothing to do except assume that it's translucent and take a slight rendering performance hit.
+	return false
 #endregion
