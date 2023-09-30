@@ -1,13 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw11oonun65fd"]
+[gd_scene load_steps=7 format=3 uid="uid://bw11oonun65fd"]
 
 [ext_resource type="Script" path="res://demo/demo_main.gd" id="1_6n0kj"]
 [ext_resource type="Script" path="res://addons/key_prompt_texture/key_prompt_texture.gd" id="2_mlsfy"]
 
-[sub_resource type="Texture2D" id="Texture2D_885g8"]
+[sub_resource type="Texture2D" id="Texture2D_42ltb"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_mlsfy")
-button = 14
+button = 4
+
+[sub_resource type="Texture2D" id="Texture2D_rvbts"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_mlsfy")
+button = 9
+
+[sub_resource type="Texture2D" id="Texture2D_uo3wn"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_mlsfy")
+button = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubaw8"]
+font_size = 32
+font_color = Color(0.839216, 0.32549, 1, 1)
 
 [node name="demo_main" type="Control"]
 layout_mode = 3
@@ -18,31 +34,64 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6n0kj")
 
-[node name="VSplitContainer" type="VSplitContainer" parent="."]
+[node name="Split" type="VSplitContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+split_offset = 490
 dragger_visibility = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer"]
+[node name="Buttons Vertical" type="VBoxContainer" parent="Split"]
+layout_mode = 2
+alignment = 1
+
+[node name="Buttons Horizontal" type="HBoxContainer" parent="Split/Buttons Vertical"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VSplitContainer/HBoxContainer"]
+[node name="Back" type="Button" parent="Split/Buttons Vertical/Buttons Horizontal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 131)
 layout_mode = 2
-texture = SubResource("Texture2D_885g8")
+size_flags_horizontal = 6
+focus_neighbor_left = NodePath("../Select")
+focus_neighbor_right = NodePath("../Previous")
+focus_neighbor_bottom = NodePath("../../../MarginContainer/Language Picker")
+text = "Back"
+icon = SubResource("Texture2D_42ltb")
 
-[node name="MarginContainer" type="MarginContainer" parent="VSplitContainer"]
+[node name="Previous" type="Button" parent="Split/Buttons Vertical/Buttons Horizontal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(178, 131)
 layout_mode = 2
-theme_override_constants/margin_left = 450
-theme_override_constants/margin_top = 400
-theme_override_constants/margin_right = 450
-theme_override_constants/margin_bottom = 200
+size_flags_horizontal = 6
+focus_neighbor_left = NodePath("../Back")
+focus_neighbor_right = NodePath("../Select")
+focus_neighbor_bottom = NodePath("../../../MarginContainer/Language Picker")
+text = "Previous"
+icon = SubResource("Texture2D_rvbts")
 
-[node name="Language Picker" type="OptionButton" parent="VSplitContainer/MarginContainer"]
+[node name="Select" type="Button" parent="Split/Buttons Vertical/Buttons Horizontal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(157, 131)
 layout_mode = 2
+size_flags_horizontal = 6
+focus_neighbor_left = NodePath("../Previous")
+focus_neighbor_right = NodePath("../Back")
+focus_neighbor_bottom = NodePath("../../../MarginContainer/Language Picker")
+text = "Select"
+icon = SubResource("Texture2D_uo3wn")
+
+[node name="MarginContainer" type="VBoxContainer" parent="Split"]
+layout_mode = 2
+
+[node name="Language Picker" type="OptionButton" parent="Split/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../../Buttons Vertical/Buttons Horizontal/Back")
 alignment = 1
 item_count = 3
 selected = 0
@@ -52,3 +101,13 @@ popup/item_1/text = "Deutsch"
 popup/item_1/id = 1
 popup/item_2/text = "中文"
 popup/item_2/id = 2
+
+[node name="Info" type="Label" parent="Split/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "Try playing with different controllers and locales!"
+label_settings = SubResource("LabelSettings_ubaw8")
+horizontal_alignment = 1
+
+[connection signal="item_selected" from="Split/MarginContainer/Language Picker" to="." method="change_locale"]

@@ -17,3 +17,24 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/key_prompt_texture/plugin.cfg")
+
+[internationalization]
+
+locale/translation_remaps={
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_0/PlayStation.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_0/Steam Deck.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_0/Switch.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_0/Xbox.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_4/PlayStation.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_4/Steam Deck.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_4/Switch.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_4/Xbox.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_9/PlayStation.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_9/Steam Deck.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_9/Switch.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh"),
+"res://addons/key_prompt_texture/textures/JOY_BUTTON_9/Xbox.png": PackedStringArray("res://demo/assets/DE.png:de", "res://demo/assets/ZH.png:zh")
+}
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.698039, 0.698039, 0.698039, 1)
