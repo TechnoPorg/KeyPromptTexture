@@ -37,4 +37,4 @@ locale/translation_remaps={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.698039, 0.698039, 0.698039, 1)
+environment/defaults/default_clear_color=Color(0.313726, 0.345098, 0.392157, 1)
