@@ -11,4 +11,4 @@ Different button prompts can be shown in different locales by using Godot's [ass
 ### Credits:
 Ships by default with [Xelu's Free Controller Prompts](https://thoseawesomeguys.com/prompts/) (CC0).
 ### License:
-This project is available under the BSD Zero Clause License.
+This project is available under the MIT License.
